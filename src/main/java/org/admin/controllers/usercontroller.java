@@ -1,9 +1,7 @@
 package org.admin.controllers;
 
-import org.admin.entities.area;
 import org.admin.entities.role;
 import org.admin.entities.user;
-import org.admin.services.interfaces.iareaservice;
 import org.admin.services.interfaces.iroleservice;
 import org.admin.services.interfaces.iuserservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +30,6 @@ public class usercontroller {
 
     @Autowired
     private iroleservice roleService;
-
-    @Autowired
-    private iareaservice areaservice;
 
 
     @GetMapping
@@ -68,7 +62,6 @@ public class usercontroller {
     @GetMapping("/create")
     public String create(user user, Model model){
         model.addAttribute("role", roleService.getAll());
-        model.addAttribute("area", areaservice.getAll());
         return "user/create";
     }
 
@@ -79,16 +72,14 @@ public class usercontroller {
                        @RequestParam Integer areaid,
                        RedirectAttributes attributes){
         role role = roleService.findOneById(roleid).get();
-        area area = areaservice.findOneById(areaid).get();
 
-        if(role != null && area != null){
+        if(role != null){
             user userd = new user();
             userd.setFirstname(firstname);
             userd.setLastname(lastname);
             userd.setEmail(email);
             userd.setPassword(password);
             userd.setRole(role);
-            userd.setArea(area);
 
             userservice.save(userd);
             attributes.addFlashAttribute("msg", "Usuario creado correctamente");
@@ -100,7 +91,6 @@ public class usercontroller {
     public String edit(@PathVariable("userid") Integer userid, Model model){
         user userd = userservice.findOneById(userid).get();
         model.addAttribute("role", roleService.getAll());
-        model.addAttribute("area", areaservice.getAll());
         model.addAttribute("user", userd);
         return "user/edit";
     }
@@ -112,9 +102,8 @@ public class usercontroller {
                          @RequestParam Integer areaid,
                          RedirectAttributes attributes){
         role role = roleService.findOneById(roleid).get();
-        area area = areaservice.findOneById(areaid).get();
 
-        if(role != null && area != null){
+        if(role != null){
             user userd = new user();
             userd.setUserid(userid);
             userd.setFirstname(firstname);
@@ -122,7 +111,6 @@ public class usercontroller {
             userd.setEmail(email);
             userd.setPassword(password);
             userd.setRole(role);
-            userd.setArea(area);
 
             userservice.createOrEditOne(userd);
             attributes.addFlashAttribute("msg", "Usuario modificado correctamente");
