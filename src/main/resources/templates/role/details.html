@@ -1,0 +1,62 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout" >
+
+<div layout:fragment="content">
+    <!-- Mostrar mensaje de confirmación en caso de éxito -->
+
+    <div class="tailwind-container">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <div class="max-w-md mx-auto mt-2">
+            <form th:action="@{/role/save}" th:object="${role}" method="post" class="space-y-4">
+                <input type="hidden" th:field="*{roleid}">
+
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md">
+                    <div class="p-6 space-y-2">
+                        <h3 class="text-2xl font-semibold">Detalles del rol</h3>
+                    </div>
+                    <div class="p-6 grid gap-4">
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium" for="roleid">Rol ID</label>
+                            <input
+                                    class="form-control h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                    type="number"
+                                    id="roleid"
+                                    name="roleid"
+                                    th:field="*{roleid}"
+                                    readonly
+                            />
+                        </div>
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium" for="rolename">Nombre del Rol</label>
+                            <input
+                                    class="h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                    type="text"
+                                    id="rolename"
+                                    name="rolename"
+                                    th:field="*{rolename}"
+                                    readonly
+                            />
+                        </div>
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium" for="status">Estado</label>
+                            <input
+                                    class="h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                    type="text"
+                                    id="status"
+                                    name="status"
+                                    th:field="*{status}"
+                                    readonly
+                            />
+                        </div>
+                    </div>
+                    <div class="flex items-center p-6">
+                        <a th:href="@{/role}" class="bg-green-500 hover:bg-green-600 ml-auto h-10 px-4 py-2 rounded-md text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">Regresar</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout">
+
+
+<div layout:fragment="content">
+    <h1>Asignar nuevo equipo</h1>
+    <form th:action="@{/deviceassignments/save}" th:object="${deviceassignment}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="status">Estado</label>
+                    <input type="text" class="form-control" th:field="*{status}" id="status" placeholder="Escriba el estado" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="user">Usuario</label>
+                    <select id="user" name="userid" class="form-control" required>
+                        <option th:each="user : ${user}" th:value="${user.userid}" th:text="${user.userid}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="device">Equipo</label>
+                    <select id="device" name="deviceid" class="form-control" required>
+                        <option th:each="device : ${device}" th:value="${device.deviceid}" th:text="${device.devicename}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+        <a th:href="@{/deviceassignments}">Regresar</a>
+    </form>
+</div>
+

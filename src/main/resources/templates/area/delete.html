@@ -1,0 +1,66 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout" >
+
+<div layout:fragment="content">
+    <div class="tailwind-container">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <div class="max-w-md mx-auto mt-2">
+            <form th:action="@{/area/delete}" th:object="${area}" method="post" class="space-y-4">
+                <input type="hidden" th:field="*{areaid}">
+
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md">
+                    <div class="p-6 space-y-2">
+                        <h3 class="text-2xl font-semibold">Eliminar Área</h3>
+                    </div>
+                    <div class="p-6 grid gap-4">
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium" for="areaid">ID</label>
+                            <input
+                                    class="h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                    type="text"
+                                    id="areaid"
+                                    name="areaid"
+                                    th:field="*{areaid}"
+                                    required
+                                    readonly
+                            />
+                        </div>
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium" for="areaname">Nombre del Área</label>
+                            <input
+                                    class="h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                    type="text"
+                                    id="areaname"
+                                    name="areaname"
+                                    th:field="*{areaname}"
+                                    required
+                                    readonly
+                            />
+                        </div>
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium" for="status">Estado</label>
+                            <input
+                                    class="h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                    type="text"
+                                    id="status"
+                                    name="status"
+                                    th:field="*{status}"
+                                    required
+                                    readonly
+                            />
+                        </div>
+                    </div>
+                    <div class="flex items-center p-6">
+                        <button type="submit" class="bg-red-500 hover:bg-red-600  ml-auto h-10 px-4 py-2 rounded-md text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                            Eliminar Área
+                        </button>
+                        <a th:href="@{/area}" class="bg-green-500 hover:bg-green-600  ml-1 h-10 px-4 py-2 rounded-md text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">Regresar</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

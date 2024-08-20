@@ -1,0 +1,51 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout" >
+
+
+<div layout:fragment="content">
+    <h1>Editar asignación de equipo</h1>
+    <form th:action="@{/deviceassignments/save}" th:object="${deviceassignment}" method="post">
+        <input type="hidden" th:object="${assigmentid}">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="asignmendate">Fecha de asignacion</label>
+                    <input type="text" class="form-control" th:object="${asignmendate}" id="asignmendate" placeholder="Escriba el nombre del equipo" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="status">Estado</label>
+                    <textarea class="form-control" th:field="*{status}" id="status" cols="12" rows="3" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="user">Usuario</label>
+                    <select id="user" name="userid" class="form-control" required>
+                        <option th:each="user : ${user}" th:value="${user.userid}" th:text="${user.userid}"  th:selected="${user.userid} == ${deviceassignment.user.userid}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="device">Equipo</label>
+                    <select id="device" name="deviceid" class="form-control" required>
+                        <option th:each="device : ${device}" th:value="${device.deviceid}" th:text="${device.devicename}" th:selected="${device.deviceid} == ${deviceassignment.device.deviceid}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button> |
+        <a th:href="@{/deviceassignments}">Regresar</a>
+    </form>
+</div>

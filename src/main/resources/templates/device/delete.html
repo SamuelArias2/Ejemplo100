@@ -1,0 +1,32 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div layout:fragment="content">
+    <h1>Eliminar Equipo</h1>
+    <h3>¿Está seguro que desea eliminar este registro?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2" >ID</dt>
+            <dd class = "col-sm-10" th:text="${device.deviceid}"></dd>
+            <dt class = "col-sm-2">Nombre</dt>
+            <dd class = "col-sm-10" th:text="${device.devicename}"></dd>
+            <dt class = "col-sm-2" >Sistema Operativo</dt>
+            <dd class = "col-sm-10" th:text="${device.operatingsystem}"></dd>
+            <dt class = "col-sm-2">Marca</dt>
+            <dd class = "col-sm-10" th:text="${device.brand}"></dd>
+            <dt class = "col-sm-2" >Fecha de Ingreso</dt>
+            <dd class = "col-sm-10" th:text="${device.dateofentry}"></dd>
+            <dt class = "col-sm-2">Estado</dt>
+            <dd class = "col-sm-10" th:text="${device.status}"></dd>
+        </dl>
+
+        <form th:action="@{/devices/delete}" method="post">
+            <input type="hidden" name="deviceid" th:value="${device.deviceid}">
+            <input type="submit" value="Eliminar" class="btn btn-danger"> |
+            <a th:href="@{/devices}">Regresar</a>
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout">
+
+
+<div layout:fragment="content">
+    <div class="ms-5 mt-2">
+        <h1>Editar Usuario</h1>
+        <form th:action="@{/users/update}"  method="post">
+            <input type="hidden" name="userid" th:value="${user.userid}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstname">Nombre</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" th:value="${user.firstname}"
+                               placeholder="Escriba el nombre del Usuario" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="lastname">Apellido</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" th:value="${user.lastname}"
+                               placeholder="Escriba el apellido del Usuario" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" th:value="${user.email}"
+                               placeholder="Escriba el email del Usuario" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" th:value="${user.password}"
+                               placeholder="Escriba la contraseña del Usuario" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="role">Rol</label>
+                        <select id="role" name="roleid" class="form-control" required>
+                            <option th:each="role : ${role}" th:value="${role.roleid}" th:text="${role.rolename}"
+                                    th:selected="${role.roleid} == ${user.role.roleid}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="area">Area</label>
+                        <select id="area" name="areaid" class="form-control" required>
+                            <option th:each="area : ${area}" th:value="${area.areaid}" th:text="${area.areaname}"
+                                    th:selected="${area.areaid} == ${user.area.areaid}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            |
+            <a th:href="@{/users}">Regresar</a>
+        </form>
+    </div>
+</div>

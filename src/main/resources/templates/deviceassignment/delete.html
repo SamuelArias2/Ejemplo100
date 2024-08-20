@@ -1,0 +1,28 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout" >
+
+
+<div layout:fragment="content">
+    <h1>Eliminar asignación de equipo</h1>
+    <h3>¿Está seguro que desea eliminar este registro?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2" >ID</dt>
+            <dd class = "col-sm-10" th:text="${assignmentid}"></dd>
+            <dt class = "col-sm-2">Fecha de registro</dt>
+            <dd class = "col-sm-10" th:text="${assignmentid}"></dd>
+            <dt class = "col-sm-2">Estado</dt>
+            <dd class = "col-sm-10" th:text="${status}"></dd>
+        </dl>
+
+        <form th:action="@{/deviceassignments/delete}" method="post">
+            <input type="hidden" name="assignmentid" th:value="${assignmentid}">
+            <input type="submit" value="Eliminar" class="btn btn-danger"> |
+            <a th:href="@{/deviceassignments}">Regresar</a>
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,114 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainlayout" >
+
+<div layout:fragment="content">
+    <!-- Mostrar mensaje de confirmación en caso de éxito -->
+    <div class="tailwind-container">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+
+            <!-- Card Que Muestra La Informacion En Forma De Resumen -->
+            <div class="col-span-1 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4">Panel</h2>
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <span>Total de Roles</span>
+                        <span class="font-semibold" id="countrole" th:text="${totalrole}">0</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin De Card Que Muestra La Informacion En Forma De Resumen -->
+
+
+            <!-- Agregar Nuevo Role A La Card -->
+            <div class="col-span-1 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4">Agregar un nuevo rol</h2>
+                <form th:action="@{/role/save}" th:object="${role}" method="post" class="space-y-4">
+                    <div class="form-group">
+                        <!--<input
+                            class="w-full border rounded-md p-2 form-control"
+                            placeholder="Agregue el Id del rol"
+                            type="number"
+                            id="roleid"
+                            name="roleid"
+                            required
+                        />-->
+                    </div>
+                    <div class="form-group">
+                        <input
+                                class="w-full border rounded-md p-2 form-control"
+                                placeholder="Ingrese el nombre del rol"
+                                type="text"
+                                id="rolename"
+                                name="rolename"
+                                required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <input
+                                class="w-full border rounded-md p-2 form-control"
+                                placeholder="Ingrese el estado del rol"
+                                type="text"
+                                id="status"
+                                name="status"
+                                required
+                        />
+                    </div>
+                    <button
+                            class="w-full bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600"
+                            type="submit"
+                    >
+                        Agregar Rol
+                    </button>
+                </form>
+            </div>
+            <!-- Fin De Agregar Nuevo Role A La Card -->
+
+            <!-- Product List Table -->
+            <div class="col-span-1 md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4">Lista de Roles</h2>
+                <div class="overflow-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                        <tr class="border-b">
+                            <th class="p-4">Identificador</th>
+                            <th class="p-4">Nombre del Rol</th>
+                            <th class="p-4">Estado</th>
+                            <th class="p-4">Acciones</th>
+                        </tr>
+                        </thead>
+
+                        <!--Contenido de la tabla-->
+                        <tbody>
+
+                        <tr th:each="item : ${role}" class="border-b">
+                            <td th:text="${item.roleid}" class="p-4"></td>
+                            <td th:text="${item.rolename}" class="p-4"></td>
+                            <td th:text="${item.status}" class="p-4"></td>
+                            <td>
+                                <a th:href="@{/role/details/{roleid} (roleid = ${item.roleid}) }" class="bg-green-500 text-white rounded-md p-2 hover:bg-green-600">Detalles</a> |
+                                <a th:href="@{/role/edit/{roleid} (roleid = ${item.roleid}) }" class="bg-yellow-500 text-white rounded-md p-2 hover:bg-yellow-600">Editar</a> |
+                                <a th:href="@{/role/remove/{roleid} (roleid = ${item.roleid}) }" class="bg-red-500 text-white rounded-md p-2 hover:bg-red-600">Eliminar</a>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                        <!--Fin del Contenido de la tabla-->
+
+                    </table>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                                <a class="page-link" th:href="@{|/role?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
